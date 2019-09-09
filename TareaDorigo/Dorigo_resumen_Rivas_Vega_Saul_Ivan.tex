@@ -1,0 +1,43 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\usepackage[spanish]{babel}
+ \usepackage{url}
+\usepackage[spanish, fixlanguage]{babelbib}
+\bibliographystyle{IEEEtran}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{algorithm2e}
+
+\title{Resumen del artículo:\\ “Ant colony optimization theory: A survey” \\ de Marco Dorigo y Christian Blum}
+
+\author{
+	Saul Ivan Rivas Vega \\
+	\\
+	Inteligencia Artificial\\
+\\
+}
+
+\date{\today}
+
+\begin{document}
+	\maketitle
+	\pagebreak
+	\paragraph{}
+	En este artículo se habla sobre la técnica de optimización por colonia de Hormigas, introducido por primera vez en 1991 por Marco Dorigo. Esta técnica es una metaheurística inspirada en la naturaleza para resolver problemas de optimización combinatoria. \\
+	La optimización por colonia de hormigas (OCH), esta inspirada por como es el comportamiento de hormigas reales. Al regresar a la colonia después de encontrar comida, las hormigas dejan un camino de feromonas, cuya intensidad varia con respecto a la cantidad y calidad de la fuente de comida. Este camino de feromonas influye en la ruta de búsqueda de las demás hormigas atrayéndolas a la fuente de comida, así mismo estas hormigas seguirán manteniendo el camino de feromonas hasta que la fuente sea agotada.\\
+	Los problemas de optimización combinatoria son aquellos que, dados un conjunto de soluciones finitas y una función objetivo que asigna un valor a cada solución, tienen como objetivo encontrar la solución de menor \textit{costo} o como es el caso de métodos de aproximación como OCH una solución lo suficientemente buena en un tiempo aceptable.\\
+	La parte central de la OCH es su modelo de probabilístico con el que son generadas las soluciones. En este caso es llamado el \textit{modelo de feromonas}, que es un vector que contiene los llamados \textit{parámetros de camino de feromonas} los cuales están asociados a componentes de solución. En tiempo de ejecución la OCH actualiza este vector para poder concentrar la generación de soluciones en regiones del espacio de búsqueda de calidad.\\
+	Esto implícitamente asume que las buenas soluciones están compuestas de buenos componentes de solución.\\
+	La definición de la OCH es muy general y las variaciones existen en como se realiza la actualización de las feromonas, como por ejemplo el tomar la mejor de la iteración pasada. Aunque sencilla también suele hacer que el algoritmo converja rápidamente, otra variante es tomar la mejor durante toda la ejecución hasta el momento actual.s \\\\
+	El artículo también muestra el análisis de interrogantes sobre la convergencia de la OCH. Preguntándose si es posible que con los recursos suficientes y el tiempo suficiente, el algoritmo converja en la solución óptima al menos una vez, llamada \textit{convergencia de valor}. Así mismo si es que el algoritmo sigue obteniendo la misma solución llamada \textit{convergencia de solución}.\pagebreak\\
+	Se mencionan las demostraciones de convergencia que para el caso de la \textit{convergencia de valor}, dadas los recursos teóricamente necesarios así como el tiempo necesario la probabilidad de llegar a una solución óptima es cercano a 1, esto por que las mejores soluciones eventualmente serán retiradas de las regiones de búsqueda utilizadas para generar soluciones. La razón por la que se retiran es por el \textit{factor de evaporación}, lo que disminuye la influencia de las mejores soluciones con el paso de las iteraciones en favor de seguir explorando nuevas regiones en el espacio de búsqueda. Esto permite que toda solución tenga una probabilidad de ser generada mayor a 0. Así se llega a que con la suficiente cantidad de iteraciones una solución óptima será generada al menos una vez. \\ 
+	La demostración de que el algoritmo seguirá generando la misma solución tiene consideraciones adicionales puesto que puede imponerse una cota inferior para los valores de feromonas para que cada hormiga pueda generar cualquier solución con una probabilidad mayor a cero. En otros casos la disminución de los valores de feromonas puede converger a 0 para los componentes que no pertenecen a la solución óptima y por lo tanto generando la misma solución siempre.\\
+	Dichas demostraciones no son de mucha relevancia en términos prácticos puesto que no es realmente factible contar con recursos ilimitados o un número infinito de iteraciones.\\\\
+	La siguiente sección del artículo esta enfocada a la búsqueda basada en modelos (BBM). La cual incluye una función de probabilidad para los componentes de solución y de feromonas para un muestreo del conjunto solución. En la BBM la actualización de los valores de feromonas se ve determinado por el valor esperado de las mismas en la función de probabilidad antes mencionada.\\ Se hace mención de 2 métodos, \textit{gradiente ascendente estocástico} y \textit{entropía cruzada}. El método de \textit{gradiente ascendente estocástico} realiza modificaciones a los parámetros del modelo al calcular el gradiente de la función de esperanza de probabilidad de los valores de feromonas. El método de \textit{entropía cruzada} busca modificar en cada iteración la distribución de probabilidad de los valores de feromonas para aproximarlo a la distribución que genere soluciones de mejor calidad. Finalmente en esta sección realiza un análisis de ambos métodos y de como el cálculo de los valores esperados son realizados en tiempos aceptables.\\\pagebreak\\
+	Finalmente se detallan los posibles sesgos de búsqueda asociadas a los algoritmos de la OCH. Como lo es el sesgo de búsqueda dado por una competencia injusta, esto es presentado con un problema y un algoritmo de OCH para el cual al momento de actualizar los valores de las feromonas las soluciones sub-óbtimas fueron recorridas por mas hormigas a diferencia de soluciones óptimas haciendo que el espacio de búsqueda siguiera esas regiones sub-óptimas y finalmente disminuyendo el valor esperado de la calidad de las soluciones. Otro sesgo es el de selección de un punto determinado, \textit{fix-point selection bias}, el cual esta relacionado a la competencia entre las hormigas en la generación de soluciones, ya que es considerada como una fuerza de conducción en los algoritmos de OCH y que para instancias de problemas donde el tamaño es tal que la competencia en subproblemas disminuye terminando con el comportamiento del algoritmo como si solo usara una hormiga causando que los valores de feromonas queden constantes.\\
+	A lo largo del artículo se dejan problemas abiertos que pueden ser analizados en futuras investigaciones, así como sugerencias para la implementación de varios algoritmos de OCH, en general es una gran referencia para las implicaciones teóricas y prácticas de los mismos con una visión de retos interesantes y consideraciones en el desarrollo de nuevos algoritmos o en la evaluación de los existentes.
+ \end{document}
