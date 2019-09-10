@@ -1,0 +1,1503 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\usepackage[spanish]{babel}
+ \usepackage{url}
+\usepackage[spanish, fixlanguage]{babelbib}
+\bibliographystyle{IEEEtran}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{algorithm2e}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\def \L {2.}
+\title{Tarea\\ 8 Puzzle}
+
+\author{
+	Saul Ivan Rivas Vega \\
+	\\
+	Inteligencia Artificial\\
+\\
+}
+
+\date{\today}
+
+\begin{document}
+	\maketitle
+\pagebreak
+\paragraph{}
+	En el presente trabajo se describen tres búsquedas a partir de un estado inicial a un estado final en el puzzle 8, un rompecabezas deslizante que tiene piezas numeradas del 1 al 8 en un tablero de 3 x 3, lo cual hace que tenga un hueco y sea precisamente este el que permita que las piezas se deslicen y ocupen el lugar del hueco.\\ El \textit{estado inicial} para el ejercicio es el siguiente:\\
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{4 & 2 & 1\\ 7 & 3 & 5\\  & 8 & 6\\ };
+	
+	\draw[thick,white,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	\draw[thick,white,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	\end{tikzpicture}\\
+	Y el \textit{estado final}:\\
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{1 & 2 & 3\\ 4 & 5 & 6\\ 7 & 8 & \\ };
+	
+	\draw[thick,white,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	\draw[thick,white,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	\end{tikzpicture}\\	
+	
+	Las piezas que se pueden mover son las que son adyacentes al hueco. Un estado del rompecabezas $a$ es \textit{vecino} de otro estado $b$ si de $a$ se puede llegar a $b$ en un movimiento.\\
+	\paragraph{Métodos de búsqueda:}
+	\begin{itemize}
+		\item Búsqueda en amplitud.
+		\item Búsqueda en profundidad.
+		\item Búsqueda por Ascensión de colinas (Hill Climbing).
+	\end{itemize} 
+	\pagebreak
+	\paragraph{Camino de solución. }Este es una sucesión de estados vecinos que llevan del \textit{estado inicial} al \textit{estado final}. \\
+	
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{4 & 2 & 1\\ 7 & 3 & 5\\  & 8 & 6\\ };
+	
+	\draw[thick,black,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{4 & 2 & 1\\ 7 & 3 & 5\\ 8 &  & 6\\ };
+	
+	\draw[thick,black,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{4 & 2 & 1\\ 7 & 3 & 5\\ 8 & 6 & \\ };
+	
+	\draw[thick,black,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{4 & 2 & 1\\ 7 & 3 & \\ 8 & 6 & 5\\ };
+	
+	\draw[thick,black,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{4 & 2 & 1\\ 7 &  & 3\\ 8 & 6 & 5\\ };
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,black,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	\end{tikzpicture}\\
+	
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{4 & 1 & 3\\ 7 & 2 & 5\\  8 &  & 6\\ };
+	
+	\draw[thick,black,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{4 & 1 & 3\\ 7 & 2 & 5\\  8 & 6 & \\ };
+	
+	\draw[thick,black,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{4 & 1 & 3\\ 7 & 2 & \\  8 & 6 & 5\\ };
+	
+	\draw[thick,black,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{4 & 1 & \\ 7 & 2 & 3\\  8 & 6 & 5\\ };
+	
+	\draw[thick,black,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{4 &  & 1\\ 7 & 2 & 3\\  8 & 6 & 5\\ };
+	\draw[thick,black,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	\end{tikzpicture}\\
+	
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{4 & 1 & 3\\ 7 & 2 & 5\\  & 8 & 6\\ };
+	
+	\draw[thick,black,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{4 & 1 & 3\\  & 2 & 5\\ 7 & 8 & 6\\ };
+	
+	\draw[thick,black,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ & 1 & 3\\ 4 & 2 & 5\\ 7 & 8 & 6\\ };
+	
+	\draw[thick,black,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{1 &  & 3\\ 4 & 2 & 5\\ 7 & 8 & 6\\ };
+	
+	\draw[thick,black,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{1 & 2 & 3\\ 4 &  & 5\\ 7 & 8 & 6\\ };
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,black,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	\end{tikzpicture}\\
+	
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{1 & 2 & 3\\ 4 & 5 & 6\\ 7 & 8 & \\ };
+	
+	\draw[thick,white,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{1 & 2 & 3\\ 4 & 5 & \\ 7 & 8 & 6\\ };
+	\draw[thick,black,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	\end{tikzpicture}\\
+	\pagebreak
+	\section{Búsqueda en Amplitud.}
+	En este método se toma un \textit{estado inicial}, se inserta en una estructura de datos que cumpla la propiedad de que el primero que entra es el primero que sale, es decir una \textit{cola} $q$.
+	Ahora mientras que haya elementos en $q$ se realizaran las siguientes operaciones.
+	\begin{itemize}
+		\item Sacar $u$, siendo el primer elemento formado en $q$.
+		\item Si $u$ es igual al \textit{estado final}, terminar.
+		\item Revisar cuales de sus vecinos $v$ no han sido visitados e insertarlos en $q$.
+	\end{itemize}
+	El método anterior recorrerá los estados en orden por la propiedad de orden de $q$, lo que es recorrer los nodos en orden de distancia al \textit{estado inicial}. Se recorrerán los estados a distancia 1, después los de distancia 2 así sucesivamente hasta llegar al \textit{estado final}. Visto en una gráfica con estados como vértices:\\
+	\pagebreak
+	\paragraph{}Gráfica búsqueda en amplitud.\\
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{4 & 2 & 1\\ 7 & 3 & 5\\  & 8 & 6\\ };
+
+	\draw[thick,black,<-] (-1*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	\draw[thick,black,<-] (1*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}\\
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.7em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{\\ \\ \\ };
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{4 & 2 & 1\\ 7 & 3 & 5\\ 8 &  & 6\\ };
+	
+	\draw[thick,black,<-] (-2*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	\draw[thick,black,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=2em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=2em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=4em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\   &  & \\ };
+	
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{4 & 2 & 1\\  & 3 & 5\\  7 & 8 & 6\\ };
+	
+	\draw[thick,black,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	\draw[thick,black,<-] (1*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	\draw[thick,white,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	\end{tikzpicture}\\
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{4 & 2 & 1\\ 7 &  & 5\\ 8 & 3 & 6\\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,black,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{4 & 2 & 1\\ 7 & 3 & 5\\ 8 & 6 & \\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,black,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ & 2 & 1\\ 4 & 3 & 5\\ 7 & 8 & 6\\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,black,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{4 & 2 & 1\\ 3 &  & 5\\ 7 & 8 & 6\\ };
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,black,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	\end{tikzpicture}\\
+	\\
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\ $\bullet$& $\bullet$ & $\bullet$\\  &  & \\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\ $\bullet$& $\bullet$ & $\bullet$\\  &  & \\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,black,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\ $\bullet$& $\bullet$ & $\bullet$\\  &  & \\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\ $\bullet$& $\bullet$ & $\bullet$\\  &  & \\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}\\
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{1 & 2 & 3\\ 4 & 5 & 6\\ 7 & 8 & \\ };
+	
+	\draw[thick,white,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	\draw[thick,white,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	\end{tikzpicture}\\
+	\pagebreak
+	\section{Búsqueda en Profundidad.}
+	En este método se toma un \textit{estado inicial}. Posteriormente se realiza una llamada recursiva con sus vecinos y en cada llamada se realiza el siguiente proceso:
+	\begin{itemize}
+		\item $u$ es el estado actual en la llamada recursiva.
+		\item Si $u$ es igual al \textit{estado final}, terminar.
+		\item Al revisar cada vecino $v$ si no ha sido visitado, realizar una llamada recursiva en $v$.
+	\end{itemize}
+	El método anterior recorrerá los estados siguiendo el primer vecino que no ha sido visitado para cada estado $u$, después seguirá con el segundo pero hasta después de no poder avanzar mas en el camino del primer vecino. Eventualmente para cada nodo $u$ se recorrerán todos sus vecinos hasta llegar al \textit{estado final}.\\
+	Visto en una gráfica con estados como vértices es similar al camino mostrado al inicio, sin embargo pudo haber recorrido algún camino que no lo llevo al \textit{estado final}. Cabe mencionar que el recorrido no cumple con algún orden en especial, es decir no se puede determinar el camino mas corto a la solución o hacer alguna clasificación por niveles, a diferencia de las propiedades de realizar una búsqueda en amplitud.\\
+	\pagebreak
+	\paragraph{}Gráfica búsqueda en profundidad.\\
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{4 & 2 & 1\\ 7 & 3 & 5\\  & 8 & 6\\ };
+	
+	\draw[thick,black,<-] (-1*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}\\
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.7em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{\\ \\ \\ };
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{4 & 2 & 1\\ 7 & 3 & 5\\ 8 &  & 6\\ };
+	
+	\draw[thick,black,<-] (-2*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	\draw[thick,black,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=2em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=2em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=4em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\   &  & \\ };
+	
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  &\\  &  & \\ };
+	
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	\draw[thick,white,<-] (1*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	\draw[thick,white,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	\end{tikzpicture}\\
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{4 & 2 & 1\\ 7 &  & 5\\ 8 & 3 & 6\\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,black,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{4 & 2 & 1\\ 7 & 3 & 5\\ 8 & 6 & \\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,black,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\ &  & \\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	\end{tikzpicture}\\
+	\\
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\ $\bullet$& $\bullet$ & $\bullet$\\  &  & \\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\ $\bullet$& $\bullet$ & $\bullet$\\  &  & \\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,black,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\ &  &\\  &  & \\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\ &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}\\
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{1 & 2 & 3\\ 4 & 5 & 6\\ 7 & 8 & \\ };
+	
+	\draw[thick,white,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	\draw[thick,white,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	\end{tikzpicture}\\
+	\pagebreak
+	\section{Búsqueda por Ascensión de colinas (Hill Climbing).}
+	En este método se toma un \textit{estado inicial}. Puede usarse el orden de recorrido de la búsqueda de amplitud o profundidad. Supongamos el orden de profundidad, el cual consiste en realizar una llamada recursiva con el \textit{estado inicial}. En cada llamada recursiva se realizan las siguientes operaciones.
+	\begin{itemize}
+		\item $u$ es el estado actual en la llamada recursiva.
+		\item Si $u$ es el \textit{estado final}, terminar.
+		\item Se evalúa $u$ en la función objetivo $f$ para obtener el valor $f(u)$.
+		\item Al revisar cada vecino $v$, se evalúa $v$ en la función objetivo $f$ para obtener el valor $f(v)$.
+		\item Si se cumple que $f(v) > f(u)$ realizar una llamada recursiva en $v$.
+		\item Si no hay tal vecino $v$, termina.
+	\end{itemize}
+	El método anterior recorrerá los estados siguiendo el camino que estrictamente aumente el valor de la función $f$, si no tiene algún vecino que no tenga un valor mayor al ser evaluado se detiene. Esto hace que a diferencia de los métodos anteriores es posible que nunca llegue al \textit{estado final}. Sin embargo, dependerá de lo adecuada que sea la función objetivo.\\
+	Una función objetivo puede ser una que al evaluarla devuelva el número de piezas que estén en su posición correcta con respecto al \textit{estado final}.
+	\\$f(u) = \# \text{piezas en posición con respecto al \textit{estado final}.}$\\
+	Así evaluando a:\\
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{4 & 2 & 1\\ 7 & 3 & 5\\ & 8 & 6\\ };
+	
+	\draw[thick,white,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	\draw[thick,white,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	\end{tikzpicture}\\
+	Obtenemos $2$ por que las piezas $2$ y $8$ están en la misma posición que en el \textit{estado final}.Visto en una gráfica con estados como vértices es parecida a la gráfica de la búsqueda en profundidad.\\
+	\pagebreak
+	\paragraph{} Búsqueda Hill Climbing\\
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{4 & 2 & 1\\ 7 & 3 & 5\\  & 8 & 6\\ };
+	
+	\draw[] (0*\L,1*\L) 
+	-- (0*\L,1*\L) node[midway,sloped, rotate=270] {$f()=2$};
+	\draw[thick,black,<-] (-1*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[midway,sloped, rotate=285] {$f()=1$};
+	\draw[thick,black,<-] (1*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[midway,sloped, rotate=45] {$f()=3$};
+	
+	\end{tikzpicture}\\
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.7em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{\\ \\ \\ };
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{4 & 2 & 1\\ 7 & 3 & 5\\ 8 &  & 6\\ };
+	
+	\draw[thick,white,<-] (-2*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=2em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=2em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\   &  & \\ };
+	
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{4 & 2 & 1\\  & 3 & 5\\  7 & 8 & 6\\ };
+	
+	\draw[thick,black,<-] (-0.3*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[midway] {$f()=4$};
+	\draw[thick,black,<-] (1.3*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[midway,sloped, rotate=45] {$f()=3$};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	\draw[thick,white,<-] (-1*\L,0*\L) 
+	-- (-0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	\end{tikzpicture}\\
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\ & & \\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\ & &\\ & & \\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=0.3em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=0.3em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=0.3em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ & 2 & 1\\ 4 & 3 & 5\\ 7 & 8 & 6\\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[dashed,black,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[midway] {$f()=3$};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{4 & 2 & 1\\ 3 &  & 5\\ 7 & 8 & 6\\ };
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	\end{tikzpicture}\\
+	\\
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\ &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\ &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=0.3em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=0.3em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=0.3em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\  &  & \\  &  & \\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={draw,minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ 2&  & 1\\ 4& 3& 5\\  7& 8 & 6\\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\matrix [matrix of nodes,row sep=-\pgflinewidth, column sep=-\pgflinewidth,
+	column 1/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 2/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	column 3/.style={nodes={minimum width=1.5em,minimum height=1.5em}},
+	text depth=0.5ex,text height=2ex, nodes in empty cells
+	] 
+	{ &  & \\ & &\\  &  & \\ };
+	
+	\draw[thick,white,<-] (1*\L,0*\L) 
+	-- (0.5*\L,0*\L) node[] {};
+	\draw[thick,white,<-] (0*\L,-1*\L) 
+	-- (0*\L,-0.6*\L) node[] {};
+	
+	\end{tikzpicture}\\
+	\paragraph{} El estado final es el que tiene $f()=4$ puesto que la única transición a partir de ese estado es la que esta con la linea punteada y no la tomará pues tiene un valor menor. Aquí podemos observar que no se llego al \textit{estado final}.
+	
+\end{document}
