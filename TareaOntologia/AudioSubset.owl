@@ -1,0 +1,1467 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.semanticweb.org/sirivasv/ontologies/2019/8/audioSubset"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.semanticweb.org/sirivasv/ontologies/2019/8/audioSubset"
+     versionIRI="http://www.semanticweb.org/sirivasv/ontologies/2019/8/audioSubset/1.0.0">
+    <Prefix name="" IRI="http://www.semanticweb.org/sirivasv/ontologies/2019/8/audio"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Annotation>
+        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/contributor"/>
+        <Literal>Saul Ivan Rivas Vega</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/description"/>
+        <Literal xml:lang="en">Audio Ontology based upon the first two levels of &quot;Audio Set&quot;
+as shown in the Figure 1 of https://ai.google/research/pubs/pub45857.pdf
+
+Full Ontology : https://research.google.com/audioset/ontology/index.html</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/title"/>
+        <Literal xml:lang="en">Audio Subset</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <Literal>Audio Subset</Literal>
+    </Annotation>
+    <Declaration>
+        <Class IRI="#Acoustic_Environment"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Air_Conditioner"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Alarm"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Amphibians"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Animal_Sounds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Background"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Bell"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Bird_Sounds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Blender"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Boat"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Breaking_Glass"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Burning_Wood"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Car"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Cat_Sounds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Cheetah_Sounds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Chicken_Sounds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Clap"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Cleaning_Glass"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Concert"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Country"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Cow_Sounds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Crocodile_Sounds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Crowd_Ovation"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Deformable_Shell"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Digestive"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Disco"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Dishes"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Dog_Sounds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Drinks"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Explosion"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Feline_Sounds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Fire"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Flames"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Footsteps"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Fourniture"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Friction"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Frog_Sounds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Generic_impact_sounds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Glass"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Goat_Sounds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Hammer"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Hands"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Horse_Sounds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Human_Locomotion"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Human_Sounds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Human_group_actions"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Human_voice"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Indoors"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Internal_Sounds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Jump"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Kick"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Legs"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Limbs"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Lion_Sounds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Liquid"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Mammals"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Marine_mammals"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Mechanisms"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Mice_Sounds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Monkey_Sounds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Music"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Music_genre"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Music_role"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Musical_Instrument"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Nail"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Natural_Sounds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Noise"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Object_Drop"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Object_Throw"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Objects_with_an_Engine"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Outdoors"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Ox_Sounds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Percussion"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Pig_Sounds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Plastic"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Punch"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Rat_sounds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Reggae"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Reptiles"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Respiratory_Sounds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#River"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Rock"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Rodants"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Scratch"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Scream"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Screw"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Screwdriver"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Sea_Cow_Sounds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Sea_waves"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Seal_Sounds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Singing"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Slap"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Snake_Sounds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Snap"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Sound"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Sound_Reproduction"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Sounds_of_things"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Source-ambiguous_sounds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Speech"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Steel"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Steel_Clutery"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Steering_Wheel"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Storm"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Strings"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Surface_contact"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Tap_water"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Thunder"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Tiger_Sounds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Tools"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Tornado"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Vehicle"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Walking"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Washing_machine"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Water"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Waterfall"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Wedding"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Whale_Sounds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Wild_Animals"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Wind"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Wood"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Woodwinds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Channel,_environment_and_background"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Domestic_Animals,_Pets"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Domestic_Sounds,_home_sounds"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Heart_Sounds,_Heartbeat"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Livestock,_farm_animals,_working_animals"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasLongDuration"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasShortDuration"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isFoundIn"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Drums"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Flute"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Guitar"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/contributor"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/description"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/title"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#Acoustic_Environment"/>
+        <Class IRI="#Channel,_environment_and_background"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Air_Conditioner"/>
+        <Class IRI="#Objects_with_an_Engine"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Alarm"/>
+        <Class IRI="#Sounds_of_things"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Amphibians"/>
+        <Class IRI="#Wild_Animals"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Animal_Sounds"/>
+        <Class IRI="#Sound"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Background"/>
+        <Class IRI="#Music_role"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Bell"/>
+        <Class IRI="#Sounds_of_things"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Bird_Sounds"/>
+        <Class IRI="#Domestic_Animals,_Pets"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Blender"/>
+        <Class IRI="#Objects_with_an_Engine"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Boat"/>
+        <Class IRI="#Vehicle"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Breaking_Glass"/>
+        <Class IRI="#Glass"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Burning_Wood"/>
+        <Class IRI="#Fire"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Car"/>
+        <Class IRI="#Vehicle"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Cat_Sounds"/>
+        <Class IRI="#Domestic_Animals,_Pets"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Cheetah_Sounds"/>
+        <Class IRI="#Feline_Sounds"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Chicken_Sounds"/>
+        <Class IRI="#Livestock,_farm_animals,_working_animals"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Clap"/>
+        <Class IRI="#Hands"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Cleaning_Glass"/>
+        <Class IRI="#Glass"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Concert"/>
+        <Class IRI="#Music_role"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Country"/>
+        <Class IRI="#Music_genre"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Cow_Sounds"/>
+        <Class IRI="#Livestock,_farm_animals,_working_animals"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Crocodile_Sounds"/>
+        <Class IRI="#Reptiles"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Crowd_Ovation"/>
+        <Class IRI="#Human_group_actions"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Deformable_Shell"/>
+        <Class IRI="#Source-ambiguous_sounds"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Digestive"/>
+        <Class IRI="#Internal_Sounds"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Disco"/>
+        <Class IRI="#Music_genre"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Dishes"/>
+        <Class IRI="#Domestic_Sounds,_home_sounds"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Dog_Sounds"/>
+        <Class IRI="#Domestic_Animals,_Pets"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Drinks"/>
+        <Class IRI="#Liquid"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Explosion"/>
+        <Class IRI="#Sounds_of_things"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Feline_Sounds"/>
+        <Class IRI="#Wild_Animals"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Fire"/>
+        <Class IRI="#Natural_Sounds"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Flames"/>
+        <Class IRI="#Fire"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Footsteps"/>
+        <Class IRI="#Human_Locomotion"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Fourniture"/>
+        <Class IRI="#Wood"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Friction"/>
+        <Class IRI="#Surface_contact"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Frog_Sounds"/>
+        <Class IRI="#Amphibians"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Generic_impact_sounds"/>
+        <Class IRI="#Source-ambiguous_sounds"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Glass"/>
+        <Class IRI="#Sounds_of_things"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Goat_Sounds"/>
+        <Class IRI="#Livestock,_farm_animals,_working_animals"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Hammer"/>
+        <Class IRI="#Tools"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Hands"/>
+        <Class IRI="#Limbs"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Horse_Sounds"/>
+        <Class IRI="#Livestock,_farm_animals,_working_animals"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Human_Locomotion"/>
+        <Class IRI="#Human_Sounds"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Human_Locomotion"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasShortDuration"/>
+            <Class IRI="#Human_Sounds"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Human_Sounds"/>
+        <Class IRI="#Sound"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Human_group_actions"/>
+        <Class IRI="#Human_Sounds"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Human_voice"/>
+        <Class IRI="#Human_Sounds"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Indoors"/>
+        <Class IRI="#Acoustic_Environment"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Internal_Sounds"/>
+        <Class IRI="#Human_Sounds"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Jump"/>
+        <Class IRI="#Human_Locomotion"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Kick"/>
+        <Class IRI="#Legs"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Legs"/>
+        <Class IRI="#Limbs"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Limbs"/>
+        <Class IRI="#Human_Sounds"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Limbs"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasShortDuration"/>
+            <Class IRI="#Human_Sounds"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Lion_Sounds"/>
+        <Class IRI="#Feline_Sounds"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Liquid"/>
+        <Class IRI="#Sounds_of_things"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Mammals"/>
+        <Class IRI="#Wild_Animals"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Marine_mammals"/>
+        <Class IRI="#Wild_Animals"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Mechanisms"/>
+        <Class IRI="#Sounds_of_things"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Mice_Sounds"/>
+        <Class IRI="#Rodants"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Monkey_Sounds"/>
+        <Class IRI="#Mammals"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Music"/>
+        <Class IRI="#Sound"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Music"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasLongDuration"/>
+            <Class IRI="#Sound"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Music_genre"/>
+        <Class IRI="#Music"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Music_role"/>
+        <Class IRI="#Music"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Musical_Instrument"/>
+        <Class IRI="#Music"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Nail"/>
+        <Class IRI="#Tools"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Natural_Sounds"/>
+        <Class IRI="#Sound"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Noise"/>
+        <Class IRI="#Channel,_environment_and_background"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Object_Drop"/>
+        <Class IRI="#Generic_impact_sounds"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Object_Throw"/>
+        <Class IRI="#Generic_impact_sounds"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Objects_with_an_Engine"/>
+        <Class IRI="#Sounds_of_things"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Outdoors"/>
+        <Class IRI="#Acoustic_Environment"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Ox_Sounds"/>
+        <Class IRI="#Livestock,_farm_animals,_working_animals"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Percussion"/>
+        <Class IRI="#Musical_Instrument"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Percussion"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#isFoundIn"/>
+            <Class IRI="#Concert"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Pig_Sounds"/>
+        <Class IRI="#Livestock,_farm_animals,_working_animals"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Plastic"/>
+        <Class IRI="#Deformable_Shell"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Punch"/>
+        <Class IRI="#Hands"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Rat_sounds"/>
+        <Class IRI="#Rodants"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Reggae"/>
+        <Class IRI="#Music_genre"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Reptiles"/>
+        <Class IRI="#Wild_Animals"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Respiratory_Sounds"/>
+        <Class IRI="#Internal_Sounds"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#River"/>
+        <Class IRI="#Water"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Rock"/>
+        <Class IRI="#Music_genre"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Rodants"/>
+        <Class IRI="#Mammals"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Scratch"/>
+        <Class IRI="#Friction"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Scream"/>
+        <Class IRI="#Human_voice"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Screw"/>
+        <Class IRI="#Tools"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Screwdriver"/>
+        <Class IRI="#Tools"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Sea_Cow_Sounds"/>
+        <Class IRI="#Marine_mammals"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Sea_waves"/>
+        <Class IRI="#Water"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Seal_Sounds"/>
+        <Class IRI="#Marine_mammals"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Singing"/>
+        <Class IRI="#Human_voice"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Slap"/>
+        <Class IRI="#Hands"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Snake_Sounds"/>
+        <Class IRI="#Reptiles"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Snap"/>
+        <Class IRI="#Hands"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Sound_Reproduction"/>
+        <Class IRI="#Channel,_environment_and_background"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Sounds_of_things"/>
+        <Class IRI="#Sound"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Sounds_of_things"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasShortDuration"/>
+            <Class IRI="#Sound"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Source-ambiguous_sounds"/>
+        <Class IRI="#Sound"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Source-ambiguous_sounds"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasShortDuration"/>
+            <Class IRI="#Sound"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Speech"/>
+        <Class IRI="#Human_voice"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Steel"/>
+        <Class IRI="#Sounds_of_things"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Steel_Clutery"/>
+        <Class IRI="#Steel"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Steering_Wheel"/>
+        <Class IRI="#Boat"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Storm"/>
+        <Class IRI="#Natural_Sounds"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Strings"/>
+        <Class IRI="#Musical_Instrument"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Strings"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#isFoundIn"/>
+            <Class IRI="#Concert"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Surface_contact"/>
+        <Class IRI="#Source-ambiguous_sounds"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Tap_water"/>
+        <Class IRI="#Liquid"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Thunder"/>
+        <Class IRI="#Storm"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Tiger_Sounds"/>
+        <Class IRI="#Feline_Sounds"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Tools"/>
+        <Class IRI="#Sounds_of_things"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Tornado"/>
+        <Class IRI="#Wind"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Vehicle"/>
+        <Class IRI="#Sounds_of_things"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Walking"/>
+        <Class IRI="#Human_Locomotion"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Washing_machine"/>
+        <Class IRI="#Mechanisms"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Water"/>
+        <Class IRI="#Natural_Sounds"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Waterfall"/>
+        <Class IRI="#Water"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Wedding"/>
+        <Class IRI="#Music_role"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Whale_Sounds"/>
+        <Class IRI="#Marine_mammals"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Wild_Animals"/>
+        <Class IRI="#Animal_Sounds"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Wind"/>
+        <Class IRI="#Natural_Sounds"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Wood"/>
+        <Class IRI="#Sounds_of_things"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Woodwinds"/>
+        <Class IRI="#Musical_Instrument"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Woodwinds"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#isFoundIn"/>
+            <Class IRI="#Concert"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Channel,_environment_and_background"/>
+        <Class IRI="#Sound"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Channel,_environment_and_background"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasLongDuration"/>
+            <Class IRI="#Sound"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Domestic_Animals,_Pets"/>
+        <Class IRI="#Animal_Sounds"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Domestic_Sounds,_home_sounds"/>
+        <Class IRI="#Sounds_of_things"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Heart_Sounds,_Heartbeat"/>
+        <Class IRI="#Internal_Sounds"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Livestock,_farm_animals,_working_animals"/>
+        <Class IRI="#Animal_Sounds"/>
+    </SubClassOf>
+    <ClassAssertion>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#isFoundIn"/>
+            <Class IRI="#Percussion"/>
+        </ObjectSomeValuesFrom>
+        <NamedIndividual IRI="#Drums"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#isFoundIn"/>
+            <Class IRI="#Woodwinds"/>
+        </ObjectSomeValuesFrom>
+        <NamedIndividual IRI="#Flute"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#isFoundIn"/>
+            <Class IRI="#Strings"/>
+        </ObjectSomeValuesFrom>
+        <NamedIndividual IRI="#Guitar"/>
+    </ClassAssertion>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#hasLongDuration"/>
+        <ObjectProperty IRI="#hasShortDuration"/>
+    </InverseObjectProperties>
+    <InverseFunctionalObjectProperty>
+        <ObjectProperty IRI="#hasLongDuration"/>
+    </InverseFunctionalObjectProperty>
+    <InverseFunctionalObjectProperty>
+        <ObjectProperty IRI="#hasShortDuration"/>
+    </InverseFunctionalObjectProperty>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Acoustic_Environment</IRI>
+        <Literal>Acoustic Environment</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Acoustic_Environment</IRI>
+        <Literal>General environment location.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Alarm</IRI>
+        <Literal>Alarm</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Alarm</IRI>
+        <Literal>The sound of an automatic signal warning of danger.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Animal_Sounds</IRI>
+        <Literal>Animal Sounds</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Animal_Sounds</IRI>
+        <Literal>All sound produced by the bodies and actions of nonhuman animals.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Bell</IRI>
+        <Literal>Bell</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Bell</IRI>
+        <Literal>The sound of a simple instrument usually consisting of metal cast in the shape of a hollow cup, whose sides form a resonator which vibrates in a single tone upon being struck by a &quot;clapper&quot; suspended within, or by a separate mallet or hammer.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Deformable_Shell</IRI>
+        <Literal>Deformable Shell</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Deformable_Shell</IRI>
+        <Literal>Sounds that are associated with shells, rigid sheets, or other predominantly two-dimensional surfaces.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Explosion</IRI>
+        <Literal>Explosion</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Explosion</IRI>
+        <Literal>The sound of a rapid increase in volume and release of energy in an extreme manner, usually with the generation of high temperatures and the release of gases.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Fire</IRI>
+        <Literal>Fire</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Fire</IRI>
+        <Literal>Sounds resulting from the rapid oxidation of a material in the exothermic chemical process of combustion, releasing heat, light, and various reaction products.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Generic_impact_sounds</IRI>
+        <Literal>Generic impact sounds</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Generic_impact_sounds</IRI>
+        <Literal>Sounds of impacts or collisions preferentially described by their acoustic properties, rather than by immediately referring to their assumed source object(s).</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Glass</IRI>
+        <Literal>Glass</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Glass</IRI>
+        <Literal>Sounds associated with the non-crystalline amorphous solid that is often transparent and has widespread practical, technological, and decorative uses.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Human_Locomotion</IRI>
+        <Literal>Human Locomotion</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Human_Locomotion</IRI>
+        <Literal>Sounds resulting from human body actions involved in changing location.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Human_Sounds</IRI>
+        <Literal>Human Sounds</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Human_Sounds</IRI>
+        <Literal>Sounds produced by the human body through the actions of the individual.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Human_group_actions</IRI>
+        <Literal>Human group actions</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Human_group_actions</IRI>
+        <Literal>Sounds produced by groups of humans rather than individuals.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Human_voice</IRI>
+        <Literal>Human voice</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Human_voice</IRI>
+        <Literal>The human voice consists of sound made by a human being using the vocal folds for talking, singing, laughing, crying, screaming, etc. The human voice is specifically a part of human sound production in which the vocal folds are the primary sound source.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Indoors</IRI>
+        <Literal>Indoors</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Indoors</IRI>
+        <Literal>Sounds generaly found in indoors environments such as rooms in a house.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Internal_Sounds</IRI>
+        <Literal>Internal Sounds</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Internal_Sounds</IRI>
+        <Literal>Sounds generated by the organ systems within our bodies.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Limbs</IRI>
+        <Literal>Limbs</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Limbs</IRI>
+        <Literal>Sounds originating primarily from our limbs.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Liquid</IRI>
+        <Literal>Liquid</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Liquid</IRI>
+        <Literal>Sounds of a fluid that conforms to the shape of its container but retains a constant volume independent of pressure.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Mechanisms</IRI>
+        <Literal>Object with Mechanisms</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Mechanisms</IRI>
+        <Literal>Sounds that originate from human-created machinery and devices.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Music</IRI>
+        <Literal>Music</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Music</IRI>
+        <Literal>Music is an art form and cultural activity whose medium is sound and silence. The common elements of music are pitch, rhythm, dynamics, and the sonic qualities of timbre and texture.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Music_genre</IRI>
+        <Literal>Music genre</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Music_genre</IRI>
+        <Literal>Portmanteau class holding categories that represent styles or classifications of music, useful in identifying and organizing similar musical artists or recordings.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Music_role</IRI>
+        <Literal>Music role</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Music_role</IRI>
+        <Literal>Portmanteau class for categories that describe music according to its functional role. Although the genre and instrumentation of examples of each of these classes may vary widely, a listener will be able to recognize that the music is being used for a common specific purpose as stated in each class definition.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Musical_Instrument</IRI>
+        <Literal>Musical Instrument</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Musical_Instrument</IRI>
+        <Literal>Sounds specifically associated with instruments created, adapted or otherwise used to make musical sounds.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Natural_Sounds</IRI>
+        <Literal>Natural Sounds</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Natural_Sounds</IRI>
+        <Literal>Sounds produced by natural sources in their normal soundscape, excluding animal and human sounds.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Noise</IRI>
+        <Literal>Noise</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Noise</IRI>
+        <Literal>A sound that has no perceptible structure and that typically interferes with the perception of more interesting or important sounds.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Objects_with_an_Engine</IRI>
+        <Literal>Object with an engine</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Objects_with_an_Engine</IRI>
+        <Literal>The sound of a machine designed to produce mechanical energy. Combustion engines burn a fuel to create heat, which then creates a force. Electric motors convert electrical energy into mechanical motion. Other classes of engines include pneumatic motors and clockwork motors.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Outdoors</IRI>
+        <Literal>Outdoors</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Outdoors</IRI>
+        <Literal>An outdoors environment such as a forest or a street.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Sound</IRI>
+        <Literal>Sound</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Sound_Reproduction</IRI>
+        <Literal>Sound Reproduction</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Sound_Reproduction</IRI>
+        <Literal>A class for sounds that reveal the particular equipment used to capture or reproduce the sound.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Sounds_of_things</IRI>
+        <Literal>Sounds of things</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Sounds_of_things</IRI>
+        <Literal>Set of sound classes referring to sounds that are immediately understood by listeners as arising from specific objects (rather than being heard more literally as &quot;sounds&quot;).</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Source-ambiguous_sounds</IRI>
+        <Literal>Source-ambiguous sounds</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Source-ambiguous_sounds</IRI>
+        <Literal>Portmanteau class for sounds that do not immediately suggest specific source objects, but which are more likely to be perceived and described according to their acoustic properties.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Steel</IRI>
+        <Literal>Steel</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Steel</IRI>
+        <Literal>Sounds associated with any physical item that is made of steel.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Storm</IRI>
+        <Literal>Storm</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Storm</IRI>
+        <Literal>The sound of a storm characterized by the presence of lightning and its acoustic effect on the Earth&apos;s atmosphere, known as thunder.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Surface_contact</IRI>
+        <Literal>Surface contact</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Surface_contact</IRI>
+        <Literal>Sounds produced by a more extended interaction between two objects or surfaces instead of a collision or bounce.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Tools</IRI>
+        <Literal>Tools</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Tools</IRI>
+        <Literal>Sounds associated with any physical item that can be used to achieve a goal, especially if the item is not consumed in the process.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Vehicle</IRI>
+        <Literal>Vehicle</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Vehicle</IRI>
+        <Literal>Sounds of mobile machines that transport people or cargo.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Water</IRI>
+        <Literal>Water</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Water</IRI>
+        <Literal>Sounds caused by motion of liquid water.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Wild_Animals</IRI>
+        <Literal>Wild Animals</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Wild_Animals</IRI>
+        <Literal>Sounds associated with animals not normally raised by humans.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Wind</IRI>
+        <Literal>Wind</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Wind</IRI>
+        <Literal>Sounds caused by the large-scale flow of gases, especially the air flowing over the surface of the Earth. Long-duration winds have various names associated with their average strength, such as breeze, gale, storm, and hurricane.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Wood</IRI>
+        <Literal>Wood</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Wood</IRI>
+        <Literal>Sounds associated with the porous and fibrous structural tissue found in the stems and roots of trees, and other woody plants.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Channel,_environment_and_background</IRI>
+        <Literal>Channel, environment and background</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Channel,_environment_and_background</IRI>
+        <Literal>A class for sound categories that suggest information about attributes other than the foreground or target objects.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Domestic_Animals,_Pets</IRI>
+        <Literal>Domestic Animals, Pets</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Domestic_Animals,_Pets</IRI>
+        <Literal>Sounds of animals kept in close proximity to humans for company, protection, and entertainment.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Domestic_Sounds,_home_sounds</IRI>
+        <Literal>Domestic Sounds, home sounds</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Domestic_Sounds,_home_sounds</IRI>
+        <Literal>Sounds that suggest they have been recorded in the home.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Livestock,_farm_animals,_working_animals</IRI>
+        <Literal>Livestock, farm animals, working animals</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Livestock,_farm_animals,_working_animals</IRI>
+        <Literal>Sound made by animals associated with farms and agriculture.</Literal>
+    </AnnotationAssertion>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
