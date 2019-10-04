@@ -1,0 +1,129 @@
+Sistemas de agentes
+class Entorno()
+class Agente()
+
+traza de percepción 
+traza de comando 
+transducción
+
+Clase Entorno:
+
+class Entorno():
+    def __init__(self, inventario_inicial):
+        self.t = 0
+        self.historial_inventario = []
+        self.historial_precio = []
+        
+        self.inventario = inventario_inicial
+
+Clase Agente:
+
+class Agente():
+    def __init__(self, entorno):
+        self.entorno = entorno
+        
+        lectura = entorno.estado_inicial()
+        self.promedio = self.ultimo_precio = lectura["precio"]
+        self.inventario = lectura["inventario"]
+
+Añadir la funcionalidad de estado inicial al entorno
+
+import random
+class Entorno():
+    precio_minimo = 230
+    precio_maximo = 320
+
+    def estado_inicial(self):
+        self.historial_inventario.append(self.inventario)
+        precio = random.randrange(self.precio_minimo, self.precio_maximo)
+        self.historial_precio.append(precio)
+        return {"precio": precio, "inventario": self.inventario}
+
+Ejemplo: Casa Inteligente
+percepciones, accion, estado de creencia, controlador, funcion de transición.
+
+Añadir Funcionalidad al agente
+
+def ejecutar_acciones(self, n):
+    for i in range(n):
+        if self.ultimo_precio < 0.9 * self.promedio and self.inventario < 60
+            por_comprar = 48
+        elif self.inventario < 12:
+            por_comprar = 12
+        else:
+            por_comprar = 0
+
+Estados de creencia, en el agente
+
+def ejecutar_acciones(self, n):
+    for i in range(n):
+        if self.ultimo_precio < 0.9 * self.promedio and self.inventario < 60
+            por_comprar = 48
+        elif self.inventario < 12:
+            por_comprar = 12
+        else:
+            por_comprar = 0
+
+        lectura = self.entorno.paso(por_comprar)
+        self.ultimo_precio = lectura["precio"]
+        self.promedio += (self.ultimo_precio-self.promedio) * 0.05
+        self.inventario = lectura["inventario"]
+
+Añadir la funcionalidad de un paso en el tiempo al entorno
+    
+    usados_minimo = 0
+    usados_maximo = 6
+
+def paso(self, cantidad_compra):
+    self.t += 1
+    usados = random.randrange(self.usados_minimo, self.usados_maximo)
+    self.inventario = self.inventario - usados + cantidad_compra
+
+    self.historial_inventario.append(self.inventario)
+    precio = random.randrange(self.precio_minimo, self.precio_maximo)
+    self.historial_precio.append(precio)
+    return {"precio": precio, "inventario": self.inventario}
+
+Definir clase para graficar con matplotlib.pyplot
+
+import matplotlib.pyplot as plt
+
+class Grafica():
+    def __init__(self, agente, entorno):
+        self.agente = agente
+        self.entorno = entorno
+        plt.xlabel("Tiempo")
+        plt.ylabel("Inventario                          Precio")
+
+    def graficar(self):
+        num = len(self.entorno.historial_inventario)
+        plt.plot(range(num), self.entorno.historial_inventario, label="Inventario")
+        plt.plot(range(num), self.entorno.historial_precio, label="Precio")
+        plt.show()
+
+TODO: Instalar matplotlib
+
+Correr simulacion
+
+entorno = Entorno(20)
+agente = Agente(entorno)
+grafica = Grafica(agente, entorno)
+
+agente.ejecutar_acciones(100)
+grafica.graficar();
+
+
+== Control Jerarquico ==
+    Agentes con Agentes subordinados
+    Agentes de rápida accion a los estimulos y agentes que razonen
+
+    Interacciones bajo-alto nivel Jerarquico
+
+funcion de memoria
+funcion de comando
+funcion de percepcion
+
+Capas de acciones
+capa intermedia, capa superior
+
+checar las presentaciones en el drive
