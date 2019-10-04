@@ -1,6 +1,6 @@
-import Agente
-import Entorno
-import Grafica
+from Agente import Agente
+from Entorno import Entorno
+from Grafica import Grafica
 
 entorno = Entorno(20)
 agente = Agente(entorno)
