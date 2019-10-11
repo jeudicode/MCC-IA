@@ -1,0 +1,16 @@
+Agente Lider / Agentes Vehiculos
+                     Uber
+                     /|\
+                    v v v
+
+
+Entorno incluye a los usuarios
+Entorno / usuarios
+                    Entorno
+                     /|\
+                    u u u
+
+
+-- Para el proyecto el Agente lider o de control / Superior
+    decide que agentes se comunican con cuales otros
+
