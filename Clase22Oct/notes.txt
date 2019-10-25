@@ -1,0 +1,59 @@
+Generalizacion, sobreajuste y falta de ajuste
+
+- Generalizacion: capacidad de proporcionar predicciones precisas para datos nuevos que no se habían visto anteriormente.
+- Modelos complejos -> sobreajuste
+- Modelos simples -> falta de ajuste
+
+Modelo de regresión lineal
+- Vector de características
+- Salida como una función lineal
+
+    Se optimiza una función objetivo,
+    En un caso simple se sua, la suma de las diferencias cuadradas (RSS)
+
+    Coeficiente de derminación de R-Cuadrado
+
+Regresión ridge
+
+Normalización de características
+- Datos muy juntos en un area pequeña, y con la Normalización se realiza una separación.
+- Se usan scalers, como MinMaxScaler
+
+Fuga de datos del conjunto de prueba en la fase de entrenamiento del modelo.
+Se puede controlar el parametro para ridge.
+
+Problemas de regresión
+
+Regresión logística 
+Determinar el valor de salida al transformar un valor entre 0 y 1, con una distribución de probabilidad
+de que pertenezca a una clase. Utiliza una función sigmoide. Como cambia con respecto al error.
+
+Entrenamiento por clases -> one vs rest
+
+Clasificadores lineales
+función de signo en lugar de una función sigmoide como en la regresión logística
+los valores en las x son características para un mismo objeto a evaluar en signo
+con la infinita cantidad de Clasificadores lineales, la mejor sera con el mayor margen, 
+que es el area de separación en el clasificador líneal.
+
+Máquinas de vectores de soporte, es para encontrar el clasificador lineal con margen máximo.
+
+Vectores de soporte con kernels
+
+Validación cruzada
+
+Múltiples divisiones de entrenamiento-prueba
+K fold cross_validation 
+5_fold
+10_fold
+Cada división es una capa
+scikit learn tiene las fuciones necesarias para relizar dicha división
+Pipelines
+Extracción de características en lugar de utilizar ejemplos del area de prueba
+
+Árboles de decisión 
+Se tiene un conjunto de reglas
+
+Clasificador Bayes Ingenuo
+----- El profesor y el loco -----
+The professor and the madman
